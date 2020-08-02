@@ -1,4 +1,4 @@
-
+<script src="https://www.mercadopago.com/v2/security.js" view="item"></script>
 <div class="as-search-wrapper" role="main">
     <div class="as-navtuck-wrapper">
         <div class="as-l-fullwidth  as-navtuck" data-events="event52">
@@ -84,7 +84,15 @@
                                     {{ unit }}
                                 </h3>
                             </div>
-                            <button type="submit" class="mercadopago-button" formmethod="post">Pagar</button>
+                            <div>                             
+
+                                <form action="/pagar" method="POST">
+                                    <script
+                                    src="https://www.mercadopago.com.mx/integrations/v1/web-payment-checkout.js"
+                                    data-preference-id="{{ preference_id }}">
+                                    </script>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
