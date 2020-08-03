@@ -5,7 +5,8 @@ var app = express();
 var  mp =  require('mercadopago');
 
 const PORT = process.env.PORT || 5000
-const URL_APP = "https://dannter-mp-ecommerce-nodejs.herokuapp.com";
+const URL_APP = "localhost/5000";
+//const URL_APP = "https://dannter-mp-ecommerce-nodejs.herokuapp.com";
 
 mp.configure({
     integrator_id: 'dev_24c65fb163bf11ea96500242ac130004',
@@ -34,6 +35,7 @@ function createPreferences(payer, order, item) {
       },
 
       notification_url : URL_APP+"/notif",
+    
 
       back_urls: {
                                   success: URL_APP+'/success',
@@ -130,6 +132,23 @@ app.get('/notif', function (req, res) {
   res.status(200).send('OK');
 });
 
+app.get('/failure', function (req, res) {
+    res.render('failure', req);
+});
+
+app.get('/pending', function (req, res) {
+    res.render('pending', req);
+});
+
+app.get('/rejected', function (req, res) {
+    res.render('rejected', req);
+});
+
+
+app.get('/success', function (req, res) {
+    res.render('succes', req);
+})
+
 
 app.get('/detail', function (req, res) {
 
@@ -153,6 +172,7 @@ app.get('/detail', function (req, res) {
 
 app.post('/pagar', function (req, res) {
   let values = {};
+ console.log("inicial el pago....");
 
   values.payment_status = req.body.payment_status;
 
